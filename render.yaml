@@ -1,9 +1,11 @@
 services:
   - type: web
-    name: study-app
+    name: anatomy-study-app
     runtime: python
+    plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: streamlit run cloud_deploy_app_main.py --server.port $PORT --server.address 0.0.0.0
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
+    autoDeploy: true

@@ -1,0 +1,329 @@
+{
+  "beginner": {
+    "questions": [
+      {
+        "id": "b_lymph_1",
+        "type": "free_response",
+        "question": "What is the primary function of the lymphatic system?",
+        "answer": "It helps in immune response and fluid balance.",
+        "category": "lymphatic"
+      },
+      {
+        "id": "b_lymph_2",
+        "type": "multiple_choice",
+        "question": "Which of the following is NOT a component of the lymphatic system?",
+        "options": ["Thymus", "Spleen", "Liver", "Lymph nodes"],
+        "answer": "Liver",
+        "category": "lymphatic"
+      },
+      {
+        "id": "b_lymph_3",
+        "type": "identification",
+        "question": "Identify the structure labeled with a question mark in this lymph node histology image:",
+        "image_path": "static/images/histology/lymphatic/lymph_node.png",
+        "answer": "Germinal center",
+        "category": "lymphatic"
+      },
+      {
+        "id": "b_lymph_4",
+        "type": "matching",
+        "question": "Match the lymphatic organ with its primary function:",
+        "pairs": [
+          {"item": "Thymus", "match": "T cell development"},
+          {"item": "Spleen", "match": "Blood filtration"},
+          {"item": "Lymph nodes", "match": "Lymph filtration"},
+          {"item": "Tonsils", "match": "Trap pathogens in throat"}
+        ],
+        "category": "lymphatic"
+      },
+      {
+        "id": "b_digest_1",
+        "type": "multiple_choice",
+        "question": "Which organ produces bile for fat digestion?",
+        "options": ["Pancreas", "Liver", "Spleen", "Gallbladder"],
+        "answer": "Liver",
+        "category": "digestive"
+      },
+      {
+        "id": "b_digest_2",
+        "type": "free_response",
+        "question": "What is the name of the muscular tube that connects the pharynx to the stomach?",
+        "answer": "Esophagus",
+        "category": "digestive"
+      },
+      {
+        "id": "b_digest_3",
+        "type": "identification",
+        "question": "Identify the structure at the junction shown in this histology image:",
+        "image_path": "static/images/histology/digestive/esophagus_stomach.png",
+        "answer": "Gastroesophageal junction",
+        "category": "digestive"
+      },
+      {
+        "id": "b_digest_4",
+        "type": "matching",
+        "question": "Match the digestive organ with its primary function:",
+        "pairs": [
+          {"item": "Stomach", "match": "Protein digestion"},
+          {"item": "Small intestine", "match": "Nutrient absorption"},
+          {"item": "Liver", "match": "Bile production"},
+          {"item": "Pancreas", "match": "Enzyme secretion"}
+        ],
+        "category": "digestive"
+      },
+      {
+        "id": "b_resp_1",
+        "type": "multiple_choice",
+        "question": "What is the main muscle of respiration?",
+        "options": ["Diaphragm", "Intercostal muscles", "Abdominal muscles", "Scalene muscles"],
+        "answer": "Diaphragm",
+        "category": "respiratory"
+      },
+      {
+        "id": "b_resp_2",
+        "type": "free_response",
+        "question": "What are the tiny air sacs in the lungs where gas exchange occurs?",
+        "answer": "Alveoli",
+        "category": "respiratory"
+      },
+      {
+        "id": "b_resp_3",
+        "type": "identification",
+        "question": "Identify the structure shown in this trachea histology image:",
+        "image_path": "static/images/histology/respiratory/trachea.png",
+        "answer": "Pseudostratified ciliated columnar epithelium",
+        "category": "respiratory"
+      },
+      {
+        "id": "b_resp_4",
+        "type": "matching",
+        "question": "Match the respiratory structure with its function:",
+        "pairs": [
+          {"item": "Nose", "match": "Air filtering and warming"},
+          {"item": "Trachea", "match": "Air conduction"},
+          {"item": "Alveoli", "match": "Gas exchange"},
+          {"item": "Diaphragm", "match": "Creating negative pressure"}
+        ],
+        "category": "respiratory"
+      }
+    ]
+  },
+  "intermediate": {
+    "questions": [
+      {
+        "id": "i_lymph_1",
+        "type": "free_response",
+        "question": "Describe the role of the thymus in the immune system.",
+        "answer": "The thymus is where T cells mature and develop self-tolerance.",
+        "category": "lymphatic"
+      },
+      {
+        "id": "i_lymph_2",
+        "type": "multiple_choice",
+        "question": "Which cells are responsible for antibody production in lymph nodes?",
+        "options": ["T cells", "B cells", "Macrophages", "Natural killer cells"],
+        "answer": "B cells",
+        "category": "lymphatic"
+      },
+      {
+        "id": "i_lymph_3",
+        "type": "identification",
+        "question": "Identify the structural component in this spleen histology image:",
+        "image_path": "static/images/histology/lymphatic/spleen.png",
+        "answer": "White pulp",
+        "category": "lymphatic"
+      },
+      {
+        "id": "i_lymph_4",
+        "type": "matching",
+        "question": "Match the lymph node region with its cell population:",
+        "pairs": [
+          {"item": "Cortex", "match": "B cells"},
+          {"item": "Paracortex", "match": "T cells"},
+          {"item": "Medulla", "match": "Plasma cells"},
+          {"item": "Subcapsular sinus", "match": "Macrophages"}
+        ],
+        "category": "lymphatic"
+      },
+      {
+        "id": "i_digest_1",
+        "type": "free_response",
+        "question": "Name the main lobe divisions of the liver.",
+        "answer": "Right lobe, left lobe, caudate lobe, and quadrate lobe.",
+        "category": "digestive"
+      },
+      {
+        "id": "i_digest_2",
+        "type": "multiple_choice",
+        "question": "What type of epithelium lines the small intestine?",
+        "options": ["Stratified squamous", "Simple squamous", "Pseudostratified columnar", "Simple columnar"],
+        "answer": "Simple columnar",
+        "category": "digestive"
+      },
+      {
+        "id": "i_digest_3",
+        "type": "identification",
+        "question": "Identify the structures in this small intestine histology image:",
+        "image_path": "static/images/histology/digestive/small_intestine.png",
+        "answer": "Villi",
+        "category": "digestive"
+      },
+      {
+        "id": "i_digest_4",
+        "type": "matching",
+        "question": "Match the digestive enzyme with its substrate:",
+        "pairs": [
+          {"item": "Amylase", "match": "Starch"},
+          {"item": "Pepsin", "match": "Protein"},
+          {"item": "Lipase", "match": "Fat"},
+          {"item": "Nuclease", "match": "Nucleic acids"}
+        ],
+        "category": "digestive"
+      },
+      {
+        "id": "i_resp_1",
+        "type": "free_response",
+        "question": "Name the main lobe divisions of the right lung.",
+        "answer": "Superior, middle, and inferior lobes.",
+        "category": "respiratory"
+      },
+      {
+        "id": "i_resp_2",
+        "type": "multiple_choice",
+        "question": "What structure prevents food from entering the larynx during swallowing?",
+        "options": ["Uvula", "Epiglottis", "Soft palate", "Vocal cords"],
+        "answer": "Epiglottis",
+        "category": "respiratory"
+      },
+      {
+        "id": "i_resp_3",
+        "type": "identification",
+        "question": "Identify the cell type in this lung histology image:",
+        "image_path": "static/images/histology/respiratory/lung.png",
+        "answer": "Type II pneumocyte",
+        "category": "respiratory"
+      },
+      {
+        "id": "i_resp_4",
+        "type": "matching",
+        "question": "Match the respiratory volume with its definition:",
+        "pairs": [
+          {"item": "Tidal volume", "match": "Air moved during normal breathing"},
+          {"item": "Vital capacity", "match": "Maximum air exhaled after maximum inhalation"},
+          {"item": "Residual volume", "match": "Air remaining after maximum exhalation"},
+          {"item": "Functional residual capacity", "match": "Volume at end of normal exhalation"}
+        ],
+        "category": "respiratory"
+      }
+    ]
+  },
+  "advanced": {
+    "questions": [
+      {
+        "id": "a_lymph_1",
+        "type": "free_response",
+        "question": "Explain the process of negative selection in the thymus and its significance.",
+        "answer": "Negative selection is the process where self-reactive T cells are eliminated in the thymus to prevent autoimmunity. Developing T cells that bind strongly to self-antigens undergo apoptosis.",
+        "category": "lymphatic"
+      },
+      {
+        "id": "a_lymph_2",
+        "type": "multiple_choice",
+        "question": "Which structure in the lymph node is primarily responsible for T cell activation?",
+        "options": ["Germinal center", "Paracortex", "Medullary cord", "Subcapsular sinus"],
+        "answer": "Paracortex",
+        "category": "lymphatic"
+      },
+      {
+        "id": "a_lymph_3",
+        "type": "identification",
+        "question": "Identify the specialized structure in this thymus histology image:",
+        "image_path": "static/images/histology/lymphatic/thymus.png",
+        "answer": "Hassall's corpuscle",
+        "category": "lymphatic"
+      },
+      {
+        "id": "a_lymph_4",
+        "type": "matching",
+        "question": "Match the immune cell with its primary function:",
+        "pairs": [
+          {"item": "Follicular dendritic cell", "match": "Antigen presentation to B cells"},
+          {"item": "Plasma cell", "match": "Antibody secretion"},
+          {"item": "Memory B cell", "match": "Rapid response to repeat infection"},
+          {"item": "Regulatory T cell", "match": "Suppression of immune response"}
+        ],
+        "category": "lymphatic"
+      },
+      {
+        "id": "a_digest_1",
+        "type": "free_response",
+        "question": "Describe the histological layers of the GI tract from innermost to outermost.",
+        "answer": "Mucosa (epithelium, lamina propria, muscularis mucosae), submucosa, muscularis externa (circular and longitudinal muscle), and serosa/adventitia.",
+        "category": "digestive"
+      },
+      {
+        "id": "a_digest_2",
+        "type": "multiple_choice",
+        "question": "What is the name of the specialized epithelial cells in the small intestine that secrete antimicrobial peptides?",
+        "options": ["Goblet cells", "Enteroendocrine cells", "Paneth cells", "M cells"],
+        "answer": "Paneth cells",
+        "category": "digestive"
+      },
+      {
+        "id": "a_digest_3",
+        "type": "identification",
+        "question": "Identify the pathological condition in this esophagus-stomach junction histology image:",
+        "image_path": "static/images/histology/digestive/esophagus_stomach.png",
+        "answer": "Barrett's esophagus",
+        "category": "digestive"
+      },
+      {
+        "id": "a_digest_4",
+        "type": "matching",
+        "question": "Match the GI hormone with its primary function:",
+        "pairs": [
+          {"item": "Gastrin", "match": "Stimulates gastric acid secretion"},
+          {"item": "Cholecystokinin", "match": "Stimulates pancreatic enzyme secretion"},
+          {"item": "Secretin", "match": "Stimulates bicarbonate secretion"},
+          {"item": "Ghrelin", "match": "Stimulates hunger"}
+        ],
+        "category": "digestive"
+      },
+      {
+        "id": "a_resp_1",
+        "type": "free_response",
+        "question": "Explain the physiological basis of the Hering-Breuer reflex.",
+        "answer": "The Hering-Breuer reflex is a protective mechanism that prevents overinflation of the lungs. Stretch receptors in the lungs signal the respiratory center to inhibit inspiration when the lungs are adequately inflated.",
+        "category": "respiratory"
+      },
+      {
+        "id": "a_resp_2",
+        "type": "multiple_choice",
+        "question": "Which of the following cells produces pulmonary surfactant?",
+        "options": ["Type I pneumocytes", "Type II pneumocytes", "Clara cells", "Goblet cells"],
+        "answer": "Type II pneumocytes",
+        "category": "respiratory"
+      },
+      {
+        "id": "a_resp_3",
+        "type": "identification",
+        "question": "Identify the pathological condition in this lung histology image:",
+        "image_path": "static/images/histology/respiratory/lung.png",
+        "answer": "Emphysema",
+        "category": "respiratory"
+      },
+      {
+        "id": "a_resp_4",
+        "type": "matching",
+        "question": "Match the respiratory condition with its primary pathophysiology:",
+        "pairs": [
+          {"item": "Asthma", "match": "Bronchial hyperresponsiveness"},
+          {"item": "Emphysema", "match": "Alveolar wall destruction"},
+          {"item": "Pneumonia", "match": "Alveolar inflammation and fluid accumulation"},
+          {"item": "Pulmonary fibrosis", "match": "Excessive collagen deposition"}
+        ],
+        "category": "respiratory"
+      }
+    ]
+  }
+}

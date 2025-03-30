@@ -2,10 +2,38 @@
   "beginner": {
     "questions": [
       {
-        "id": "q1",
+        "id": "b_lymph_1",
         "type": "free_response",
         "question": "What is the primary function of the lymphatic system?",
         "answer": "It helps in immune response and fluid balance.",
+        "category": "lymphatic"
+      },
+      {
+        "id": "b_lymph_2",
+        "type": "multiple_choice",
+        "question": "Which of the following is NOT a component of the lymphatic system?",
+        "options": ["Thymus", "Spleen", "Liver", "Lymph nodes"],
+        "answer": "Liver",
+        "category": "lymphatic"
+      },
+      {
+        "id": "b_lymph_3",
+        "type": "identification",
+        "question": "Identify the structure labeled with a question mark in this lymph node histology image:",
+        "image_path": "static/images/histology/lymphatic/lymph_node.png",
+        "answer": "Germinal center",
+        "category": "lymphatic"
+      },
+      {
+        "id": "b_lymph_4",
+        "type": "matching",
+        "question": "Match the lymphatic organ with its primary function:",
+        "pairs": [
+          {"item": "Thymus", "match": "T cell development"},
+          {"item": "Spleen", "match": "Blood filtration"},
+          {"item": "Lymph nodes", "match": "Lymph filtration"},
+          {"item": "Tonsils", "match": "Trap pathogens in throat"}
+        ],
         "category": "lymphatic"
       },
       {
