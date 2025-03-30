@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Quiz</h2>
+<form method="POST">
+    {% for q in quiz.questions %}
+    <div>
+        <label for="{{ q.id }}">{{ q.question }}</label><br>
+        <input type="text" name="{{ q.id }}" id="{{ q.id }}" required>
+        {% if results %}
+            {% if results[q.id] %}
+                <span style="color:green;">Correct!</span>
+            {% else %}
+                <span style="color:red;">Incorrect. Expected: {{ q.answer }}</span>
+            {% endif %}
+        {% endif %}
+    </div>
+    <br>
+    {% endfor %}
+    <button type="submit">Submit Answers</button>
+</form>
+{% endblock %}

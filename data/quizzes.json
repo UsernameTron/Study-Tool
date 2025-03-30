@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the primary function of the lymphatic system?",
+      "answer": "It helps in immune response and fluid balance."
+    },
+    {
+      "id": "q2",
+      "question": "Name the main lobe divisions of the right lung.",
+      "answer": "Superior, middle, inferior."
+    },
+    {
+      "id": "q3",
+      "question": "Which organ produces bile for fat digestion?",
+      "answer": "Liver"
+    },
+    {
+      "id": "q4",
+      "question": "What is the largest lymphatic organ in the body?",
+      "answer": "Spleen"
+    },
+    {
+      "id": "q5",
+      "question": "What are the three parts of the small intestine?",
+      "answer": "Duodenum, jejunum, ileum"
+    },
+    {
+      "id": "q6",
+      "question": "What is the main muscle of respiration?",
+      "answer": "Diaphragm"
+    },
+    {
+      "id": "q7",
+      "question": "Where do T cells mature?",
+      "answer": "Thymus"
+    },
+    {
+      "id": "q8",
+      "question": "What is peristalsis?",
+      "answer": "Movement of food through the GI tract"
+    },
+    {
+      "id": "q9",
+      "question": "What is the medical term for swelling due to lymph fluid buildup?",
+      "answer": "Lymphedema"
+    },
+    {
+      "id": "q10",
+      "question": "Which part of the respiratory system contains the vocal cords?",
+      "answer": "Larynx"
+    }
+  ]
+}
