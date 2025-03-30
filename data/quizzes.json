@@ -1,54 +1,153 @@
 {
-  "questions": [
-    {
-      "id": "q1",
-      "question": "What is the primary function of the lymphatic system?",
-      "answer": "It helps in immune response and fluid balance."
-    },
-    {
-      "id": "q2",
-      "question": "Name the main lobe divisions of the right lung.",
-      "answer": "Superior, middle, inferior."
-    },
-    {
-      "id": "q3",
-      "question": "Which organ produces bile for fat digestion?",
-      "answer": "Liver"
-    },
-    {
-      "id": "q4",
-      "question": "What is the largest lymphatic organ in the body?",
-      "answer": "Spleen"
-    },
-    {
-      "id": "q5",
-      "question": "What are the three parts of the small intestine?",
-      "answer": "Duodenum, jejunum, ileum"
-    },
-    {
-      "id": "q6",
-      "question": "What is the main muscle of respiration?",
-      "answer": "Diaphragm"
-    },
-    {
-      "id": "q7",
-      "question": "Where do T cells mature?",
-      "answer": "Thymus"
-    },
-    {
-      "id": "q8",
-      "question": "What is peristalsis?",
-      "answer": "Movement of food through the GI tract"
-    },
-    {
-      "id": "q9",
-      "question": "What is the medical term for swelling due to lymph fluid buildup?",
-      "answer": "Lymphedema"
-    },
-    {
-      "id": "q10",
-      "question": "Which part of the respiratory system contains the vocal cords?",
-      "answer": "Larynx"
-    }
-  ]
+  "beginner": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "free_response",
+        "question": "What is the primary function of the lymphatic system?",
+        "answer": "It helps in immune response and fluid balance.",
+        "category": "lymphatic"
+      },
+      {
+        "id": "q2",
+        "type": "multiple_choice",
+        "question": "Which organ produces bile for fat digestion?",
+        "options": ["Pancreas", "Liver", "Spleen", "Gallbladder"],
+        "answer": "Liver",
+        "category": "digestive"
+      },
+      {
+        "id": "q3",
+        "type": "multiple_choice",
+        "question": "What is the main muscle of respiration?",
+        "options": ["Diaphragm", "Intercostal muscles", "Abdominal muscles", "Scalene muscles"],
+        "answer": "Diaphragm",
+        "category": "respiratory"
+      },
+      {
+        "id": "q4",
+        "type": "free_response",
+        "question": "What is the largest lymphatic organ in the body?",
+        "answer": "Spleen",
+        "category": "lymphatic"
+      },
+      {
+        "id": "q5",
+        "type": "multiple_choice",
+        "question": "Which part of the respiratory system contains the vocal cords?",
+        "options": ["Pharynx", "Larynx", "Trachea", "Bronchi"],
+        "answer": "Larynx",
+        "category": "respiratory"
+      }
+    ]
+  },
+  "intermediate": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "free_response",
+        "question": "Name the main lobe divisions of the right lung.",
+        "answer": "Superior, middle, inferior.",
+        "category": "respiratory"
+      },
+      {
+        "id": "q2",
+        "type": "multiple_choice",
+        "question": "Which structure connects the pharynx to the stomach?",
+        "options": ["Trachea", "Esophagus", "Larynx", "Bronchus"],
+        "answer": "Esophagus",
+        "category": "digestive"
+      },
+      {
+        "id": "q3",
+        "type": "free_response",
+        "question": "What are the three parts of the small intestine?",
+        "answer": "Duodenum, jejunum, ileum",
+        "category": "digestive"
+      },
+      {
+        "id": "q4",
+        "type": "matching",
+        "question": "Match these respiratory structures to their functions:",
+        "pairs": [
+          {"item": "Alveoli", "match": "Gas exchange"},
+          {"item": "Trachea", "match": "Air conduction"},
+          {"item": "Diaphragm", "match": "Main breathing muscle"}
+        ],
+        "category": "respiratory"
+      },
+      {
+        "id": "q5",
+        "type": "free_response",
+        "question": "Where do T cells mature?",
+        "answer": "Thymus",
+        "category": "lymphatic"
+      },
+      {
+        "id": "q6",
+        "type": "free_response",
+        "question": "What is peristalsis?",
+        "answer": "Movement of food through the GI tract",
+        "category": "digestive"
+      }
+    ]
+  },
+  "advanced": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "free_response",
+        "question": "What is the medical term for swelling due to lymph fluid buildup?",
+        "answer": "Lymphedema",
+        "category": "lymphatic"
+      },
+      {
+        "id": "q2",
+        "type": "matching",
+        "question": "Match these digestive cells to their functions:",
+        "pairs": [
+          {"item": "Parietal cell", "match": "Secretes hydrochloric acid & intrinsic factor"},
+          {"item": "Chief cell", "match": "Secretes pepsinogen & gastric lipase"},
+          {"item": "G-cell", "match": "Secretes gastrin"}
+        ],
+        "category": "digestive"
+      },
+      {
+        "id": "q3",
+        "type": "identification",
+        "question": "Identify the labeled structure in this lymph node image:",
+        "image_path": "static/images/lymph_node_labeled.png",
+        "answer": "Germinal center",
+        "category": "lymphatic"
+      },
+      {
+        "id": "q4",
+        "type": "multiple_choice",
+        "question": "Which of the following is NOT a function of the respiratory system?",
+        "options": [
+          "Gas exchange", 
+          "pH regulation", 
+          "Protein digestion", 
+          "Temperature regulation"
+        ],
+        "answer": "Protein digestion",
+        "category": "respiratory"
+      },
+      {
+        "id": "q5",
+        "type": "free_response",
+        "question": "What is the function of the thymus?",
+        "answer": "Site for T cell maturation and differentiation",
+        "category": "lymphatic"
+      },
+      {
+        "id": "q6",
+        "type": "multiple_choice",
+        "question": "Which digestive enzyme is produced by the pancreas and breaks down proteins?",
+        "options": ["Amylase", "Pepsin", "Trypsin", "Lipase"],
+        "answer": "Trypsin",
+        "category": "digestive"
+      }
+    ]
+  }
 }

@@ -1,0 +1,167 @@
+/* Modern design and theme support for Study App */
+
+:root {
+    /* Light theme variables */
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --header-color: #2c3e50;
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --card-bg: #f8f9fa;
+    --border-color: #e0e0e0;
+}
+
+.dark-theme {
+    /* Dark theme variables */
+    --background-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --header-color: #61dafb;
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --card-bg: #2d2d2d;
+    --border-color: #4a4a4a;
+}
+
+/* Custom styles for elements */
+.main {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.stButton > button {
+    border-radius: 20px;
+    padding: 10px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.css-18e3th9 {
+    padding-top: 2rem;
+}
+
+.stExpander {
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+h1, h2, h3 {
+    color: var(--header-color);
+}
+
+/* Custom card styling */
+.custom-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Quiz styling */
+.quiz-question {
+    background-color: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.correct-answer {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.incorrect-answer {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Study content styling */
+.study-content h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.study-content h2 {
+    color: var(--header-color);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.study-content ul, .study-content ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.study-content li {
+    margin-bottom: 8px;
+}
+
+/* Progress indicators */
+.progress-indicator {
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+/* Search results */
+.search-result {
+    padding: 10px;
+    border-left: 3px solid var(--primary-color);
+    margin-bottom: 10px;
+    background-color: var(--card-bg);
+}
+
+.search-highlight {
+    background-color: rgba(255, 255, 0, 0.3);
+    padding: 0 2px;
+}
+
+/* Interactive diagram styles */
+.diagram-controls {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.page-transition {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .custom-card {
+        padding: 15px;
+    }
+    
+    .stButton > button {
+        padding: 8px 16px;
+    }
+}
