@@ -1,8 +1,8 @@
 # Core Dependencies
-streamlit==1.24.0  # Main web application framework
+streamlit>=1.28.0  # Main web application framework with Python 3.12 support
 numpy==1.26.0     # Numerical computing - version with pre-built wheels for Python 3.12
 pandas>=2.0.3     # Data analysis and manipulation
-pillow>=9.5.0,<10.0.0  # Image processing with pre-built wheels
+pillow>=10.0.0,<11.0.0  # Latest Pillow with pre-built wheels for Python 3.12
 setuptools>=68.0.0  # Provides distutils functionality
 
 # Visualization Dependencies

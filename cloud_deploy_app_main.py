@@ -1,3 +1,20 @@
+# Ensure all required directories exist first
+import os
+
+# Directory initialization function to ensure proper deployment
+def ensure_directories():
+    dirs = [
+        "data/user_progress",
+        "static/images/histology/lymphatic",
+        "static/images/histology/respiratory",
+        "static/images/histology/digestive"
+    ]
+    for d in dirs:
+        os.makedirs(d, exist_ok=True)
+
+# Run directory initialization
+ensure_directories()
+
 # Main application continuation with all needed imports
 from cloud_deploy_app_progress import progress_page
 from cloud_deploy_app_quiz import quiz_page, render_quiz_question
