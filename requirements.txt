@@ -33,7 +33,7 @@ jsonschema==4.18.0 # Implementation of JSON Schema
 MarkupSafe==2.1.3 # Safely add untrusted strings to HTML/XML markup
 packaging==23.1   # Core utilities for Python packages
 protobuf==4.23.4  # Protocol buffers
-pyarrow==12.0.1   # Apache Arrow
+pyarrow==11.0.0   # Apache Arrow (older version with pre-built wheel)
 pydeck==0.8.0     # Large-scale spatial visualization
 referencing==0.29.1 # JSON referencing
 rpds-py==0.8.11   # Rust-powered Python data structures
