@@ -1,5 +1,7 @@
 # Ensure all required directories exist first
 import os
+import streamlit as st
+from user_progress import initialize_user_progress
 
 # Directory initialization function to ensure proper deployment
 def ensure_directories():
@@ -18,12 +20,20 @@ ensure_directories()
 # Main application continuation with all needed imports
 from cloud_deploy_app_progress import progress_page
 from cloud_deploy_app_quiz import quiz_page, render_quiz_question
+from cloud_deploy_app import sidebar_elements, apply_custom_theme, home_page, tabbed_study_interface
 
 # Complete main function
 def main():
     """Main application entry point"""
     # Initialize a user identifier if not present
-    initialize_user()
+    if "user_id" not in st.session_state:
+        import uuid
+        user_id = str(uuid.uuid4())
+        st.session_state.user_id = user_id
+        initialize_user_progress(user_id)
+        
+    # Ensure required directories exist
+    os.makedirs("data/user_progress", exist_ok=True)
     
     # Apply custom theme
     apply_custom_theme()
