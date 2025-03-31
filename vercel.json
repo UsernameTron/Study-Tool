@@ -2,14 +2,17 @@
   "version": 2,
   "builds": [
     {
-      "src": "app.py",
+      "src": "cloud_deploy_app_main.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "app.py"
+      "dest": "cloud_deploy_app_main.py"
     }
-  ]
+  ],
+  "env": {
+    "PORT": "8501"
+  }
 }

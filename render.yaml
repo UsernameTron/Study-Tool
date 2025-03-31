@@ -3,9 +3,32 @@ services:
     name: anatomy-study-app
     runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run cloud_deploy_app_main.py --server.port $PORT --server.address 0.0.0.0
+    buildCommand: |
+      pip install -r requirements.txt
+      mkdir -p data/user_progress
+      mkdir -p static/images/histology/lymphatic
+      mkdir -p static/images/histology/respiratory
+      mkdir -p static/images/histology/digestive
+      python -c "import image_utils; image_utils.ensure_directories_exist(); image_utils.create_placeholder_images()"
+    startCommand: streamlit run cloud_deploy_app_main.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
+      - key: STREAMLIT_SERVER_MAX_UPLOAD_SIZE
+        value: 10
+      - key: STREAMLIT_CLIENT_TOOLBAR_MODE
+        value: minimal
+    healthCheckPath: /_stcore/health
     autoDeploy: true
+    domains:
+      - anatomy-study-app.onrender.com
+  
+  # Uncomment and modify this section if you want to use a database
+  # - type: pserv
+  #   name: anatomy-study-db
+  #   plan: free
+  #   env: python
+  #   disk:
+  #     name: data
+  #     mountPath: /data
+  #     sizeGB: 1

@@ -3,8 +3,17 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import io
-from PIL import Image
 import os
+import logging
+from PIL import Image
+from image_utils import get_image_path, ensure_directories_exist
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('interactive_diagrams')
+
+# Ensure required directories exist at import time
+ensure_directories_exist()
 
 def create_placeholder_images():
     """Create placeholder images if actual images aren't available"""
@@ -69,22 +78,30 @@ def create_placeholder_images():
                 
                 img.save(img_path)
 
-def get_image_path(diagram_type, structure):
-    """Get path to image, checking if it exists first"""
-    path = f"static/images/{diagram_type}_{structure}.png"
-    if os.path.exists(path):
-        return path
-    else:
-        # Create placeholder images if they don't exist
-        create_placeholder_images()
+def get_diagram_image_path(diagram_type, structure):
+    """Get path to diagram image with error handling"""
+    try:
+        # Use the new image_utils module for cross-platform path handling
+        return get_image_path('diagram', diagram_type, structure)
+    except Exception as e:
+        logger.error(f"Error getting image path for {diagram_type}_{structure}: {str(e)}")
+        create_placeholder_images()  # Attempt to create placeholders
+        
+        # Fallback to old path format if needed
+        path = os.path.join("static", "images", f"{diagram_type}_{structure}.png")
         return path
 
 def lymph_node_interactive():
     """Create an interactive lymph node diagram"""
     st.subheader("Lymph Node Structure")
     
-    # Load base image
-    base_img_path = get_image_path("lymph_node", "base")
+    # Load base image with error handling
+    try:
+        base_img_path = get_diagram_image_path("lymph_node", "base")
+    except Exception as e:
+        logger.error(f"Error loading base lymph node image: {str(e)}")
+        st.error("Could not load lymph node diagram. Using placeholder instead.")
+        base_img_path = os.path.join("static", "images", "lymph_node_base.png")
     
     # Create clickable areas
     col1, col2 = st.columns([3, 1])
@@ -129,8 +146,13 @@ def respiratory_system_interactive():
     """Create an interactive respiratory system diagram"""
     st.subheader("Respiratory System Structure")
     
-    # Load base image
-    base_img_path = get_image_path("respiratory", "base")
+    # Load base image with error handling
+    try:
+        base_img_path = get_diagram_image_path("respiratory", "base")
+    except Exception as e:
+        logger.error(f"Error loading base respiratory image: {str(e)}")
+        st.error("Could not load respiratory diagram. Using placeholder instead.")
+        base_img_path = os.path.join("static", "images", "respiratory_base.png")
     
     # Create clickable areas
     col1, col2 = st.columns([3, 1])
@@ -167,8 +189,13 @@ def digestive_system_interactive():
     """Create an interactive digestive system diagram"""
     st.subheader("Digestive System Structure")
     
-    # Load base image
-    base_img_path = get_image_path("digestive", "base")
+    # Load base image with error handling
+    try:
+        base_img_path = get_diagram_image_path("digestive", "base")
+    except Exception as e:
+        logger.error(f"Error loading base digestive image: {str(e)}")
+        st.error("Could not load digestive diagram. Using placeholder instead.")
+        base_img_path = os.path.join("static", "images", "digestive_base.png")
     
     # Create clickable areas
     col1, col2 = st.columns([3, 1])
@@ -208,8 +235,15 @@ def digestive_system_interactive():
             st.session_state.current_structure = None
 
 def highlight_structure(diagram_type, structure):
-    """Highlight a specific structure in a diagram"""
-    # Load the appropriate highlight overlay
-    highlight_img_path = get_image_path(diagram_type, structure)
-    st.session_state.current_highlight = highlight_img_path
-    st.session_state.current_structure = f"{diagram_type}_{structure}"
+    """Highlight a specific structure in a diagram with error handling"""
+    try:
+        # Get the image path with robust error handling
+        highlight_img_path = get_diagram_image_path(diagram_type, structure)
+        st.session_state.current_highlight = highlight_img_path
+        st.session_state.current_structure = f"{diagram_type}_{structure}"
+    except Exception as e:
+        logger.error(f"Error highlighting structure {diagram_type}_{structure}: {str(e)}")
+        st.error(f"Could not highlight {structure}. Using base diagram instead.")
+        # Fallback to base image
+        st.session_state.current_highlight = get_diagram_image_path(diagram_type, "base")
+        st.session_state.current_structure = f"{diagram_type}_base"

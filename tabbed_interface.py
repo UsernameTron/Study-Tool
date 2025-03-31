@@ -1,6 +1,15 @@
 import streamlit as st
 import os
+import logging
 from user_progress import update_viewed_section
+from image_utils import get_image_path, ensure_directories_exist
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('tabbed_interface')
+
+# Ensure required directories exist at import time
+ensure_directories_exist()
 
 def tabbed_study_interface(section):
     """
@@ -74,9 +83,13 @@ def tabbed_study_interface(section):
             image_data = next((img for img in section_images if img["title"] == selected_image), None)
             
             if image_data:
-                # Display the image
-                img_path = f"static/images/histology/{section}/{image_data['name']}.png"
-                st.image(img_path, caption=image_data["title"])
+                # Get the image path with error handling
+                try:
+                    img_path = get_image_path('histology', section, image_data['name'])
+                    st.image(img_path, caption=image_data["title"])
+                except Exception as e:
+                    logger.error(f"Error displaying image {image_data['name']}: {str(e)}")
+                    st.error(f"Could not load image: {image_data['title']}")
                 
                 # Display the description
                 st.markdown(f"""
