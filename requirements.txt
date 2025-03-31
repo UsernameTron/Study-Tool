@@ -15,7 +15,7 @@ nltk==3.8.1       # Natural language toolkit for search functionality
 python-dateutil==2.8.2 # Extensions to the standard datetime module
 pytz==2023.3      # Timezone definitions
 tzdata==2023.3    # Timezone database
-certifi==2023.7.22  # Certificates for requests
+certifi==2024.7.4  # Certificates for requests
 
 # Web and Authentication
 requests==2.31.0  # HTTP library
