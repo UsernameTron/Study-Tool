@@ -4,6 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: |
+      apt-get update && apt-get install -y zlib1g-dev
       pip install -r requirements.txt
       mkdir -p data/user_progress
       mkdir -p static/images/histology/lymphatic
