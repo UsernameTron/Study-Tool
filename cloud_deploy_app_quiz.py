@@ -532,3 +532,6 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
     st.markdown("</div>", unsafe_allow_html=True)
     
     return True if is_submitted and q_id in user_responses else False
+
+# Explicitly export the required functions
+__all__ = ['quiz_page', 'render_quiz_question']
