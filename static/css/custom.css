@@ -12,6 +12,24 @@
     --border-color: #e0e0e0;
 }
 
+/* Ensure compatibility with Streamlit components */
+.stButton > button {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+button[kind="secondary"] {
+    background-color: var(--secondary-color);
+}
+
+/* Fix for form controls */
+.stSelectbox > div > div, 
+.stSlider > div, 
+.stMultiSelect > div {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
 .dark-theme {
     /* Dark theme variables */
     --background-color: #1e1e1e;

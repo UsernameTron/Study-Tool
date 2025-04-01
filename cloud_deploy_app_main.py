@@ -49,10 +49,16 @@ def main():
     # Display sidebar and get navigation selection
     selected = sidebar_elements()
     
+    # Add debug logging
+    logger.info(f"Navigation selection: {selected}")
+    
     # Check if navigation has been overridden by state
     if 'navigation' in st.session_state:
+        logger.info(f"Navigation override: {st.session_state['navigation']}")
         selected = st.session_state['navigation']
-        del st.session_state['navigation']
+        # Don't delete the navigation state until after displaying the content
+        # This prevents navigation loops. We'll delete it later, after the page is rendered.
+        logger.info(f"Using navigation override: {selected}")
     
     # Display content based on selection
     if selected == "Home":
@@ -64,12 +70,19 @@ def main():
     elif selected == "Digestive System":
         tabbed_study_interface("digestive")
     elif selected == "Quiz":
+        logger.info("Attempting to display quiz page")
         quiz_page()
     elif selected == "Progress":
         progress_page()
     else:
         st.error("Invalid navigation selection")
         logger.error(f"Invalid navigation selection: {selected}")
+    
+    # Now that the page has been displayed, we can safely remove the navigation override
+    # to prevent navigation loops on the next rerun
+    if 'navigation' in st.session_state and st.session_state['navigation'] == selected:
+        logger.info(f"Clearing navigation state after rendering {selected}")
+        del st.session_state['navigation']
 
 # Run the application
 if __name__ == "__main__":
