@@ -6,14 +6,6 @@ def initialize_session_state():
         "user_id": None,
         "navigation": "Home",
         "dark_mode": False,
-        # Quiz-specific state variables
-        "quiz_active": False,
-        "quiz_submitted": False,
-        "user_responses": {},
-        "active_questions": [],
-        "quiz_result": {"score": 0, "total": 0, "difficulty": "intermediate"},
-        "quiz_category": None,
-        "quiz_difficulty": "intermediate",  # Make sure this is included
         "current_highlight": None,
         "current_structure": None
     }
@@ -21,3 +13,7 @@ def initialize_session_state():
     for key, default_value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = default_value
+    
+    # Quiz state is now handled by quiz_state.py
+    from quiz_state import initialize_quiz_state
+    initialize_quiz_state()

@@ -12,22 +12,13 @@ logger = configure_logging()('quiz')
 # Import required functions
 from user_progress import update_quiz_history
 from cloud_deploy_app import load_quiz_data
-
-# Helper functions for quiz state management
-def reset_quiz_state():
-    """Reset quiz state to initial configuration mode"""
-    st.session_state.quiz_active = False
-    st.session_state.quiz_submitted = False
-    st.session_state.user_responses = {}
-    st.session_state.active_questions = []
-
-def set_quiz_active(questions, difficulty):
-    """Set quiz to active state with selected questions"""
-    st.session_state.quiz_active = True
-    st.session_state.quiz_submitted = False
-    st.session_state.user_responses = {}
-    st.session_state.active_questions = questions
-    st.session_state.quiz_result = {"score": 0, "total": 0, "difficulty": difficulty}
+from quiz_state import (
+    initialize_quiz_state, 
+    reset_quiz_state, 
+    is_quiz_active, 
+    is_quiz_submitted, 
+    activate_quiz
+)
 
 def quiz_page():
     """Display the quiz interface with proper state management"""
@@ -36,20 +27,11 @@ def quiz_page():
     # Log that we've reached the quiz page
     logger.info("Quiz page function called")
     
-    # Initialize session state variables for quiz if needed
-    if "quiz_active" not in st.session_state:
-        st.session_state.quiz_active = False
-    if "quiz_submitted" not in st.session_state:
-        st.session_state.quiz_submitted = False
-    if "user_responses" not in st.session_state:
-        st.session_state.user_responses = {}
-    if "active_questions" not in st.session_state:
-        st.session_state.active_questions = []
-    if "quiz_result" not in st.session_state:
-        st.session_state.quiz_result = {"score": 0, "total": 0, "difficulty": "intermediate"}
+    # Initialize quiz state variables
+    initialize_quiz_state()
     
     # If not in active quiz, show configuration options
-    if not st.session_state.quiz_active:
+    if not is_quiz_active():
         logger.info("Showing quiz configuration")
         st.markdown("""
         <div class="custom-card">
@@ -128,11 +110,7 @@ def quiz_page():
                     selected_questions = random.sample(available_questions, num_questions)
                     
                     # Set up the quiz
-                    st.session_state.quiz_active = True
-                    st.session_state.quiz_submitted = False
-                    st.session_state.user_responses = {}
-                    st.session_state.active_questions = selected_questions
-                    st.session_state.quiz_result["difficulty"] = difficulty
+                    activate_quiz(selected_questions, difficulty)
                     
                     # Important: Don't call st.rerun() yet - finish the function first
                     logger.info("Quiz setup complete, state updated")
@@ -148,7 +126,7 @@ def quiz_page():
             st.rerun()
     
     # If in active quiz, show questions
-    elif st.session_state.quiz_active and not st.session_state.quiz_submitted:
+    elif is_quiz_active() and not is_quiz_submitted():
         logger.info("Showing active quiz questions")
         # Show questions
         st.markdown("""
@@ -252,7 +230,7 @@ def quiz_page():
             st.rerun()
     
     # If quiz submitted, show results
-    elif st.session_state.quiz_active and st.session_state.quiz_submitted:
+    elif is_quiz_active() and is_quiz_submitted():
         logger.info("Showing quiz results")
         # Show results
         score = st.session_state.quiz_result["score"]
