@@ -1,3 +1,5 @@
+import streamlit as st
+
 # Quiz page with multiple question types
 def quiz_page():
     st.title("Knowledge Quiz")
