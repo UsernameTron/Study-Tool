@@ -12,10 +12,52 @@
     --border-color: #e0e0e0;
 }
 
+/* Quiz-specific styles */
+.quiz-question {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-result-item {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Fix for input field styling */
+.stTextInput > div > div > input {
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    padding: 8px !important;
+}
+
+/* Fix for radio button spacing */
+.stRadio > div {
+    margin-top: 5px !important;
+}
+
 /* Ensure compatibility with Streamlit components */
 .stButton > button {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    background-color: #3498db !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 10px 15px !important;
+    font-weight: 500 !important;
+    margin: 10px 0 !important;
+}
+
+.stButton > button:hover {
+    background-color: #2980b9 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
 }
 
 button[kind="secondary"] {
