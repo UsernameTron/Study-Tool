@@ -1,4 +1,25 @@
 import streamlit as st
+import pandas as pd
+import altair as alt
+from datetime import datetime
+from user_progress import update_quiz_history
+from cloud_deploy_app import load_quiz_data
+
+# Helper functions for quiz state management
+def reset_quiz_state():
+    """Reset quiz state to initial configuration mode"""
+    st.session_state.quiz_active = False
+    st.session_state.quiz_submitted = False
+    st.session_state.user_responses = {}
+    st.session_state.active_questions = []
+
+def set_quiz_active(questions, difficulty):
+    """Set quiz to active state with selected questions"""
+    st.session_state.quiz_active = True
+    st.session_state.quiz_submitted = False
+    st.session_state.user_responses = {}
+    st.session_state.active_questions = questions
+    st.session_state.quiz_result = {"score": 0, "total": 0, "difficulty": difficulty}
 
 # Quiz page with multiple question types
 def quiz_page():
@@ -84,12 +105,8 @@ def quiz_page():
                 import random
                 selected_questions = random.sample(available_questions, num_questions)
                 
-                # Set up the quiz
-                st.session_state.quiz_active = True
-                st.session_state.quiz_submitted = False
-                st.session_state.user_responses = {}
-                st.session_state.active_questions = selected_questions
-                st.session_state.quiz_result["difficulty"] = difficulty
+                # Set up the quiz using the helper function
+                set_quiz_active(selected_questions, difficulty)
                 
                 # Rerun to show the quiz
                 st.rerun()
@@ -113,7 +130,7 @@ def quiz_page():
         submit_col1, submit_col2 = st.columns([3, 1])
         
         with submit_col2:
-            if st.button("Submit Quiz"):
+            if st.button("Submit Quiz", key="submit_quiz_button", use_container_width=True):
                 # Calculate score
                 score = 0
                 total = len(st.session_state.active_questions)
@@ -186,8 +203,8 @@ def quiz_page():
                 st.rerun()
         
         with submit_col1:
-            if st.button("Cancel Quiz"):
-                st.session_state.quiz_active = False
+            if st.button("Cancel Quiz", key="cancel_quiz_button", use_container_width=True):
+                reset_quiz_state()
                 st.rerun()
     
     # If quiz submitted, show results
@@ -247,14 +264,18 @@ def quiz_page():
             st.altair_chart(score_display, use_container_width=True)
         
         # Show detailed results for each question
+        st.markdown("<div class='custom-card'>", unsafe_allow_html=True)
         st.subheader("Detailed Results")
         
         for i, question in enumerate(st.session_state.active_questions):
+            st.markdown(f"<div class='quiz-result-item'>", unsafe_allow_html=True)
             st.write(f"**Question {i+1}**")
             render_quiz_question(question, True, st.session_state.user_responses)
+            st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
         
         # Provide feedback based on score
-        st.markdown("---")
+        st.markdown("<div class='custom-card'>", unsafe_allow_html=True)
         
         if percentage >= 80:
             st.success("Excellent work! You have a strong understanding of this topic.")
@@ -268,19 +289,20 @@ def quiz_page():
         
         with col1:
             if st.button("Take Another Quiz"):
-                st.session_state.quiz_active = False
-                st.session_state.quiz_submitted = False
+                reset_quiz_state()
                 st.rerun()
         
         with col2:
             if st.button("Return to Home"):
-                st.session_state.quiz_active = False
-                st.session_state.quiz_submitted = False
+                reset_quiz_state()
                 st.session_state.navigation = "Home"
                 st.rerun()
+        
+        st.markdown("</div>", unsafe_allow_html=True)
 
 # Function to handle different quiz question types
 def render_quiz_question(question, is_submitted=False, user_responses=None):
+    """Render a quiz question with improved styling and layout"""
     q_id = question["id"]
     q_type = question["type"]
     
@@ -289,22 +311,25 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
     
     if q_type == "free_response":
         if not is_submitted:
-            # Display input field if not submitted
+            # Display input field with improved styling
+            st.markdown("<div class='quiz-input-container'>", unsafe_allow_html=True)
             user_answer = st.text_input(
                 "Your answer:", 
                 key=f"input_{q_id}",
                 value=user_responses.get(q_id, "") if user_responses else "",
                 label_visibility="collapsed"
             )
+            st.markdown("</div>", unsafe_allow_html=True)
             # Store the answer
             if user_responses is not None:
                 user_responses[q_id] = user_answer
         else:
-            # Show results if submitted
+            # Show results with consistent styling
             user_answer = user_responses.get(q_id, "")
             expected = question["answer"]
             is_correct = user_answer.lower().strip() == expected.lower().strip()
             
+            st.markdown("<div class='quiz-input-container'>", unsafe_allow_html=True)
             st.text_input(
                 "Your answer:", 
                 value=user_answer,
@@ -312,6 +337,7 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
                 disabled=True,
                 label_visibility="collapsed"
             )
+            st.markdown("</div>", unsafe_allow_html=True)
             
             if is_correct:
                 st.markdown(f"<span class='correct-answer'>✓ Correct!</span>", unsafe_allow_html=True)
@@ -321,7 +347,8 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
     
     elif q_type == "multiple_choice":
         if not is_submitted:
-            # Display options if not submitted
+            # Display options with consistent styling
+            st.markdown("<div class='quiz-input-container'>", unsafe_allow_html=True)
             selected = st.radio(
                 "Select your answer:",
                 question["options"],
@@ -329,11 +356,12 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
                 index=None,
                 label_visibility="collapsed"
             )
+            st.markdown("</div>", unsafe_allow_html=True)
             # Store the answer
             if user_responses is not None and selected is not None:
                 user_responses[q_id] = selected
         else:
-            # Show results if submitted
+            # Show results with consistent styling
             user_answer = user_responses.get(q_id, "")
             expected = question["answer"]
             is_correct = user_answer == expected
@@ -342,6 +370,7 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
             options = question["options"]
             selected_idx = options.index(user_answer) if user_answer in options else None
             
+            st.markdown("<div class='quiz-input-container'>", unsafe_allow_html=True)
             st.radio(
                 "Select your answer:",
                 options,
@@ -350,6 +379,7 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
                 disabled=True,
                 label_visibility="collapsed"
             )
+            st.markdown("</div>", unsafe_allow_html=True)
             
             if is_correct:
                 st.markdown(f"<span class='correct-answer'>✓ Correct!</span>", unsafe_allow_html=True)
@@ -363,24 +393,41 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
         matches = [p["match"] for p in pairs]
         
         if not is_submitted:
-            # Create a match dropdown for each item
+            # Create a match dropdown for each item with improved layout
+            st.markdown("<div class='quiz-input-container'>", unsafe_allow_html=True)
             for i, pair in enumerate(pairs):
                 item = pair["item"]
                 
-                selected = st.selectbox(
-                    f"{item}",
-                    matches,
-                    key=f"input_{q_id}_{i}",
-                    index=None
-                )
+                st.markdown(f"<div class='matching-item'>", unsafe_allow_html=True)
+                
+                # Create three columns for better layout
+                col1, col2, col3 = st.columns([3, 1, 6])
+                
+                with col1:
+                    st.markdown(f"<div class='matching-item-label'>{item}</div>", unsafe_allow_html=True)
+                
+                with col2:
+                    st.markdown("<div style='text-align: center; font-weight: bold;'>→</div>", unsafe_allow_html=True)
+                
+                with col3:
+                    selected = st.selectbox(
+                        f"Match for {item}",
+                        matches,
+                        key=f"input_{q_id}_{i}",
+                        label_visibility="collapsed"
+                    )
+                
+                st.markdown("</div>", unsafe_allow_html=True)
                 
                 # Store the answer
                 if user_responses is not None and selected is not None:
                     if q_id not in user_responses:
                         user_responses[q_id] = {}
                     user_responses[q_id][item] = selected
+            st.markdown("</div>", unsafe_allow_html=True)
         else:
-            # Show results
+            # Show results with improved layout
+            st.markdown("<div class='quiz-input-container'>", unsafe_allow_html=True)
             correct_count = 0
             total_pairs = len(pairs)
             
@@ -392,51 +439,64 @@ def render_quiz_question(question, is_submitted=False, user_responses=None):
                 
                 if is_correct:
                     correct_count += 1
-                    st.markdown(f"**{item}** → {user_match} <span class='correct-answer'>✓</span>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='matching-item'><div class='matching-item-label'>{item}</div> → {user_match} <span class='correct-answer'>✓</span></div>", unsafe_allow_html=True)
                 else:
-                    st.markdown(f"**{item}** → {user_match} <span class='incorrect-answer'>✗</span>", unsafe_allow_html=True)
-                    st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;*Should be:* {expected}", unsafe_allow_html=True)
+                    st.markdown(f"<div class='matching-item'><div class='matching-item-label'>{item}</div> → {user_match} <span class='incorrect-answer'>✗</span></div>", unsafe_allow_html=True)
+                    st.markdown(f"<div style='margin-left: 20px; margin-bottom: 10px;'>Should be: {expected}</div>", unsafe_allow_html=True)
             
             # Overall result for matching
             if correct_count == total_pairs:
                 st.markdown(f"<span class='correct-answer'>All matches correct!</span>", unsafe_allow_html=True)
             else:
                 st.markdown(f"<span class='incorrect-answer'>{correct_count}/{total_pairs} correct matches</span>", unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
     
     elif q_type == "identification":
-        # Show the image
-        st.image(question["image_path"], caption="Identify the labeled structure")
+        # Improved layout for identification questions
+        st.markdown("<div class='identification-container'>", unsafe_allow_html=True)
         
-        if not is_submitted:
-            # Display input field if not submitted
-            user_answer = st.text_input(
-                "Your identification:", 
-                key=f"input_{q_id}",
-                value=user_responses.get(q_id, "") if user_responses else "",
-                label_visibility="collapsed"
-            )
-            # Store the answer
-            if user_responses is not None:
-                user_responses[q_id] = user_answer
-        else:
-            # Show results if submitted
-            user_answer = user_responses.get(q_id, "")
-            expected = question["answer"]
-            is_correct = user_answer.lower().strip() == expected.lower().strip()
-            
-            st.text_input(
-                "Your identification:", 
-                value=user_answer,
-                key=f"result_{q_id}",
-                disabled=True,
-                label_visibility="collapsed"
-            )
-            
-            if is_correct:
-                st.markdown(f"<span class='correct-answer'>✓ Correct!</span>", unsafe_allow_html=True)
+        # Create columns for better layout
+        col1, col2 = st.columns([3, 2])
+        
+        with col1:
+            # Show the image
+            st.image(question["image_path"], caption="Identify the labeled structure", use_column_width=True)
+        
+        with col2:
+            if not is_submitted:
+                # Display input field with prompt
+                st.markdown("<div class='identification-prompt'>What is this structure?</div>", unsafe_allow_html=True)
+                user_answer = st.text_input(
+                    "Your identification:", 
+                    key=f"input_{q_id}",
+                    value=user_responses.get(q_id, "") if user_responses else "",
+                    label_visibility="collapsed"
+                )
+                # Store the answer
+                if user_responses is not None:
+                    user_responses[q_id] = user_answer
             else:
-                st.markdown(f"<span class='incorrect-answer'>✗ Incorrect.</span>", unsafe_allow_html=True)
-                st.markdown(f"**Expected answer:** {expected}", unsafe_allow_html=True)
+                # Show results with improved styling
+                user_answer = user_responses.get(q_id, "")
+                expected = question["answer"]
+                is_correct = user_answer.lower().strip() == expected.lower().strip()
+                
+                st.markdown("<div class='identification-prompt'>Your answer:</div>", unsafe_allow_html=True)
+                st.text_input(
+                    "Your identification:", 
+                    value=user_answer,
+                    key=f"result_{q_id}",
+                    disabled=True,
+                    label_visibility="collapsed"
+                )
+                
+                if is_correct:
+                    st.markdown(f"<span class='correct-answer'>✓ Correct!</span>", unsafe_allow_html=True)
+                else:
+                    st.markdown(f"<span class='incorrect-answer'>✗ Incorrect.</span>", unsafe_allow_html=True)
+                    st.markdown(f"**Expected answer:** {expected}", unsafe_allow_html=True)
+        
+        st.markdown("</div>", unsafe_allow_html=True)
     
     st.markdown("</div>", unsafe_allow_html=True)
     
