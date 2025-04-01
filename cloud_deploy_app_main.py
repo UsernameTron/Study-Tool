@@ -70,17 +70,19 @@ def main():
     elif selected == "Digestive System":
         tabbed_study_interface("digestive")
     elif selected == "Quiz":
+        # Important: DO NOT clear navigation state for Quiz until user explicitly navigates away
         logger.info("Attempting to display quiz page")
         quiz_page()
+        # DO NOT delete the navigation state here!
     elif selected == "Progress":
         progress_page()
     else:
         st.error("Invalid navigation selection")
         logger.error(f"Invalid navigation selection: {selected}")
     
-    # Now that the page has been displayed, we can safely remove the navigation override
-    # to prevent navigation loops on the next rerun
-    if 'navigation' in st.session_state and st.session_state['navigation'] == selected:
+    # Only clear navigation state AFTER this conditional block
+    # and only if we're not on the Quiz page
+    if 'navigation' in st.session_state and selected != "Quiz":
         logger.info(f"Clearing navigation state after rendering {selected}")
         del st.session_state['navigation']
 
