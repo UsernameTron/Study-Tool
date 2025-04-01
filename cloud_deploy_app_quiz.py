@@ -195,7 +195,7 @@ def quiz_page():
         # Show results
         score = st.session_state.quiz_result["score"]
         total = st.session_state.quiz_result["total"]
-        percentage = (score / total) * 100
+        percentage = (score / max(1, total)) * 100  # Prevent division by zero
         
         st.markdown(f"""
         <div class="custom-card">

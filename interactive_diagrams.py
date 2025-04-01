@@ -4,13 +4,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import io
 import os
-import logging
 from PIL import Image
 from image_utils import get_image_path, ensure_directories_exist
+from logging_config import configure_logging
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger('interactive_diagrams')
+logger = configure_logging()('interactive_diagrams')
 
 # Ensure required directories exist at import time
 ensure_directories_exist()
@@ -79,17 +78,27 @@ def create_placeholder_images():
                 img.save(img_path)
 
 def get_diagram_image_path(diagram_type, structure):
-    """Get path to diagram image with error handling"""
+    """Get path to diagram image with specific error handling"""
     try:
-        # Use the new image_utils module for cross-platform path handling
+        # Use the image_utils module for cross-platform path handling
         return get_image_path('diagram', diagram_type, structure)
+    except FileNotFoundError:
+        logger.warning(f"Image not found for {diagram_type}_{structure}, creating placeholder")
+        try:
+            create_placeholder_images()  # Attempt to create placeholders
+            return get_image_path('diagram', diagram_type, structure)
+        except Exception as e:
+            logger.error(f"Failed to create placeholder: {str(e)}")
+            # Return a default path as last resort
+            return os.path.join("static", "images", "default_placeholder.png")
+    except PermissionError as e:
+        logger.error(f"Permission error accessing image: {str(e)}")
+        # Log specific permission errors but allow them to propagate
+        raise
     except Exception as e:
-        logger.error(f"Error getting image path for {diagram_type}_{structure}: {str(e)}")
-        create_placeholder_images()  # Attempt to create placeholders
-        
-        # Fallback to old path format if needed
-        path = os.path.join("static", "images", f"{diagram_type}_{structure}.png")
-        return path
+        logger.error(f"Unexpected error getting image path: {str(e)}")
+        # Return a fallback path
+        return os.path.join("static", "images", f"{diagram_type}_base.png")
 
 def lymph_node_interactive():
     """Create an interactive lymph node diagram"""

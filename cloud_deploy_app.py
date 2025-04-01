@@ -66,10 +66,15 @@ def sidebar_elements():
     with theme_col1:
         st.write("Theme:")
     with theme_col2:
-        if st.toggle("Dark Mode", value=st.session_state.get("dark_mode", False), key="toggle_theme"):
-            st.session_state.dark_mode = True
-        else:
-            st.session_state.dark_mode = False
+        # Check if streamlit version supports toggle
+        try:
+            # Try to use toggle
+            dark_mode = st.toggle("Dark Mode", value=st.session_state.get("dark_mode", False), key="toggle_theme")
+            st.session_state.dark_mode = dark_mode
+        except:
+            # Fall back to checkbox for older Streamlit versions
+            dark_mode = st.checkbox("Dark Mode", value=st.session_state.get("dark_mode", False), key="toggle_theme")
+            st.session_state.dark_mode = dark_mode
     
     st.sidebar.markdown("---")
     

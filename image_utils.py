@@ -1,11 +1,10 @@
 import os
-import logging
 from PIL import Image, ImageDraw, ImageFont
 import streamlit as st
+from logging_config import configure_logging
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger('image_utils')
+logger = configure_logging()('image_utils')
 
 # Define required image directories
 REQUIRED_DIRECTORIES = [

@@ -71,9 +71,13 @@ def update_viewed_section(user_id, section):
     """Record that user has viewed a section"""
     progress = load_user_progress(user_id)
     
-    if section in progress["viewed_sections"]:
-        timestamp = datetime.now().isoformat()
-        progress["viewed_sections"][section].append(timestamp)
-        save_user_progress(user_id, progress)
+    # Ensure section exists in viewed_sections
+    if section not in progress["viewed_sections"]:
+        progress["viewed_sections"][section] = []
+    
+    # Add timestamp
+    timestamp = datetime.now().isoformat()
+    progress["viewed_sections"][section].append(timestamp)
+    save_user_progress(user_id, progress)
     
     return progress
